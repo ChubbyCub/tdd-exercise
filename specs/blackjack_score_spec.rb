@@ -23,13 +23,19 @@ describe "Blackjac Score" do
 
   it "facecards have values calculated correctly" do
     # Arrange
-    hand = ["King", 2]
+    hand_one = ["King", 2]
+    hand_two = ["Queen", 2]
+    hand_three = ["Jack", 2]
 
     # Act
-    score = blackjack_score(hand)
+    score_one = blackjack_score(hand_one)
+    score_two = blackjack_score(hand_two)
+    score_three = blackjack_score(hand_three)
 
     # Assert
-    expect(score).must_equal 12
+    expect(score_one).must_equal 12
+    expect(score_two).must_equal 12
+    expect(score_three).must_equal 12
   end
 
   it "calculates aces as 11 where it does not go over 21" do
@@ -55,24 +61,12 @@ describe "Blackjac Score" do
   end
 
   it "raises an ArgumentError for invalid cards" do
-    # Arrange
-    hand = ["Yum", 4, 5]
-
-    # Act
-    score = blackjack_score(hand)
-
     # Assert
-    expect(score).must_raise ArgumentError
+    expect { blackjack_score(["King", 3, "J"]) }.must_raise ArgumentError
   end
 
   it "raises an ArgumentError for more than 5 cards in the hand" do
-    # Arrange
-    hand = [4, 8, 1, 9, "King", "Queen"]
-
-    # Act
-    score = blackjack_score(hand)
-
     # Assert
-    expect(score).must_raise ArgumentError
+    expect { blackjack_score([4, 8, 1, 9, "King", "Queen"]) }.must_raise ArgumentError
   end
 end
